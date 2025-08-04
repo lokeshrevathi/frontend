@@ -21,12 +21,6 @@ const TaskCreateForm = ({ milestones, projectId, onCreated, onCancel }) => {
   const [availableUsers, setAvailableUsers] = useState([]);
   const [loadingMembers, setLoadingMembers] = useState(false);
 
-  useEffect(() => {
-    if (projectId && canAssignUsers()) {
-      fetchProjectMembers();
-    }
-  }, [projectId, canAssignUsers, fetchProjectMembers]);
-
   const fetchProjectMembers = useCallback(async () => {
     setLoadingMembers(true);
     try {
@@ -44,6 +38,12 @@ const TaskCreateForm = ({ milestones, projectId, onCreated, onCancel }) => {
       setLoadingMembers(false);
     }
   }, [projectId]);
+
+  useEffect(() => {
+    if (projectId && canAssignUsers()) {
+      fetchProjectMembers();
+    }
+  }, [projectId, canAssignUsers, fetchProjectMembers]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -28,10 +28,6 @@ const TaskEditPage = () => {
     status: 'todo',
   });
 
-  useEffect(() => {
-    fetchTaskData();
-  }, [id, fetchTaskData]);
-
   const fetchTaskData = useCallback(async () => {
     try {
       setLoading(true);
@@ -70,6 +66,10 @@ const TaskEditPage = () => {
       setLoading(false);
     }
   }, [id, user?.id, navigate]);
+
+  useEffect(() => {
+    fetchTaskData();
+  }, [id, fetchTaskData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

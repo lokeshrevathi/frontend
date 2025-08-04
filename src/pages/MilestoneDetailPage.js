@@ -29,10 +29,6 @@ const MilestoneDetailPage = () => {
     due_date: ''
   });
 
-  useEffect(() => {
-    fetchMilestoneData();
-  }, [id, fetchMilestoneData]);
-
   const fetchMilestoneData = useCallback(async () => {
     try {
       const [milestoneRes, tasksRes] = await Promise.all([
@@ -61,6 +57,10 @@ const MilestoneDetailPage = () => {
       setLoading(false);
     }
   }, [id]);
+
+  useEffect(() => {
+    fetchMilestoneData();
+  }, [id, fetchMilestoneData]);
 
   const handleUpdate = async () => {
     try {

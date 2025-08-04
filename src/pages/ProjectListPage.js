@@ -6,11 +6,9 @@ import { ConditionalRender } from '../components/RoleGuard';
 import { 
   Plus, 
   Search, 
-  Filter, 
   Calendar, 
   Clock,
   Eye,
-  Edit,
   Trash2
 } from 'lucide-react';
 import toast from 'react-hot-toast';

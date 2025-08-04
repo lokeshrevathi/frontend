@@ -48,10 +48,6 @@ const ProjectDetailPage = () => {
     totalHours: 0
   });
 
-  useEffect(() => {
-    fetchProjectData();
-  }, [id, fetchProjectData]);
-
   const fetchProjectData = useCallback(async () => {
     try {
       console.log('Fetching project data for ID:', id);
@@ -122,6 +118,10 @@ const ProjectDetailPage = () => {
       setLoading(false);
     }
   }, [id]);
+
+  useEffect(() => {
+    fetchProjectData();
+  }, [id, fetchProjectData]);
 
   const handleMilestoneCreated = (newMilestone) => {
     setMilestones([...milestones, newMilestone]);

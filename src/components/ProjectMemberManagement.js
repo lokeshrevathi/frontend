@@ -20,11 +20,6 @@ const ProjectMemberManagement = ({ projectId }) => {
   const [addingMember, setAddingMember] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState('');
 
-  useEffect(() => {
-    fetchMembers();
-    fetchAvailableUsers();
-  }, [projectId, fetchMembers, fetchAvailableUsers]);
-
   const fetchMembers = useCallback(async () => {
     try {
       const response = await projectsAPI.getMembers(projectId);
@@ -46,6 +41,11 @@ const ProjectMemberManagement = ({ projectId }) => {
       setLoading(false);
     }
   }, [projectId]);
+
+  useEffect(() => {
+    fetchMembers();
+    fetchAvailableUsers();
+  }, [projectId, fetchMembers, fetchAvailableUsers]);
 
   const handleAddMember = async () => {
     if (!selectedUserId) {
