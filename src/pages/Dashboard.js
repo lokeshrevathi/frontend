@@ -11,18 +11,14 @@ import {
   PieChart,
   Pie,
   Cell,
-  LineChart,
-  Line
+
 } from 'recharts';
 import { projectsAPI, tasksAPI } from '../services/api';
 import { 
   FolderOpen, 
   Clock, 
   CheckCircle, 
-  AlertCircle, 
-  TrendingUp,
-  Users,
-  Calendar
+  TrendingUp
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 

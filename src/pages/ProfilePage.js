@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { User, Mail, Calendar, Edit, Save, X } from 'lucide-react';
+import { User, Mail, Edit, Save, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const ProfilePage = () => {

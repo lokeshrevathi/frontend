@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { milestonesAPI, tasksAPI, projectsAPI } from '../services/api';
 import { 
@@ -10,7 +10,6 @@ import {
   Edit,
   Trash2,
   Plus,
-  User,
   FileText
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -32,9 +31,9 @@ const MilestoneDetailPage = () => {
 
   useEffect(() => {
     fetchMilestoneData();
-  }, [id]);
+  }, [id, fetchMilestoneData]);
 
-  const fetchMilestoneData = async () => {
+  const fetchMilestoneData = useCallback(async () => {
     try {
       const [milestoneRes, tasksRes] = await Promise.all([
         milestonesAPI.getById(id),
@@ -61,7 +60,7 @@ const MilestoneDetailPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
   const handleUpdate = async () => {
     try {

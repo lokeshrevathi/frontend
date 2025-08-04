@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { tasksAPI, milestonesAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
@@ -7,7 +7,6 @@ import {
   Save, 
   Calendar, 
   AlertTriangle,
-  User,
   FileText
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -31,9 +30,9 @@ const TaskEditPage = () => {
 
   useEffect(() => {
     fetchTaskData();
-  }, [id]);
+  }, [id, fetchTaskData]);
 
-  const fetchTaskData = async () => {
+  const fetchTaskData = useCallback(async () => {
     try {
       setLoading(true);
       
@@ -70,7 +69,7 @@ const TaskEditPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, user?.id, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -91,7 +90,7 @@ const TaskEditPage = () => {
     setSaving(true);
     
     try {
-      const response = await tasksAPI.update(id, {
+      await tasksAPI.update(id, {
         ...formData,
         milestone: parseInt(formData.milestone),
       });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { commentsAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-import { MessageSquare, Send, Edit, Trash2, User } from 'lucide-react';
+import { MessageSquare, Send, Edit, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const CommentSection = ({ projectId }) => {

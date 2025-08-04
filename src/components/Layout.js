@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import HealthCheck from './HealthCheck';
-import { ConditionalRender } from './RoleGuard';
+
 import { 
   Home, 
   FolderOpen, 
@@ -11,7 +11,6 @@ import {
   Menu, 
   X,
   LogOut,
-  BarChart3,
   Users,
   CheckSquare
 } from 'lucide-react';

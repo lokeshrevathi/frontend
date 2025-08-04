@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { tasksAPI, projectsAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { ConditionalRender } from '../components/RoleGuard';
@@ -25,9 +25,9 @@ const TaskCreateForm = ({ milestones, projectId, onCreated, onCancel }) => {
     if (projectId && canAssignUsers()) {
       fetchProjectMembers();
     }
-  }, [projectId]);
+  }, [projectId, canAssignUsers, fetchProjectMembers]);
 
-  const fetchProjectMembers = async () => {
+  const fetchProjectMembers = useCallback(async () => {
     setLoadingMembers(true);
     try {
       // Get project members (current members)
@@ -43,7 +43,7 @@ const TaskCreateForm = ({ milestones, projectId, onCreated, onCancel }) => {
     } finally {
       setLoadingMembers(false);
     }
-  };
+  }, [projectId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

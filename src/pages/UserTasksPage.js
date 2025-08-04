@@ -8,15 +8,11 @@ import {
   Calendar, 
   CheckCircle, 
   Play, 
-  Pause,
   Edit,
   Trash2,
-  Plus,
-  Filter,
   Search,
   User,
-  FileText,
-  AlertTriangle
+  FileText
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import TimeLogForm from '../components/TimeLogForm';

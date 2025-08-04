@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
   projectsAPI, 
   milestonesAPI, 
-  tasksAPI, 
-  commentsAPI, 
-  attachmentsAPI 
+  tasksAPI
 } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { ConditionalRender } from '../components/RoleGuard';
@@ -21,9 +19,7 @@ import {
   Edit,
   Trash2,
   CheckCircle,
-  AlertCircle,
   Play,
-  Pause,
   Eye
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -37,7 +33,7 @@ import ProjectMemberManagement from '../components/ProjectMemberManagement';
 const ProjectDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { canCreateMilestones, canCreateTasks, canAssignUsers } = useAuth();
+  const { canCreateMilestones, canCreateTasks } = useAuth();
   const [project, setProject] = useState(null);
   const [milestones, setMilestones] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -54,9 +50,9 @@ const ProjectDetailPage = () => {
 
   useEffect(() => {
     fetchProjectData();
-  }, [id]);
+  }, [id, fetchProjectData]);
 
-  const fetchProjectData = async () => {
+  const fetchProjectData = useCallback(async () => {
     try {
       console.log('Fetching project data for ID:', id);
       
@@ -125,7 +121,7 @@ const ProjectDetailPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
   const handleMilestoneCreated = (newMilestone) => {
     setMilestones([...milestones, newMilestone]);

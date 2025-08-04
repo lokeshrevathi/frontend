@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { projectsAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { ConditionalRender } from './RoleGuard';
@@ -8,7 +8,6 @@ import {
   UserMinus, 
   AlertTriangle,
   CheckCircle,
-  XCircle,
   Loader
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -24,9 +23,9 @@ const ProjectMemberManagement = ({ projectId }) => {
   useEffect(() => {
     fetchMembers();
     fetchAvailableUsers();
-  }, [projectId]);
+  }, [projectId, fetchMembers, fetchAvailableUsers]);
 
-  const fetchMembers = async () => {
+  const fetchMembers = useCallback(async () => {
     try {
       const response = await projectsAPI.getMembers(projectId);
       setMembers(response.data);
@@ -34,9 +33,9 @@ const ProjectMemberManagement = ({ projectId }) => {
       console.error('Failed to fetch project members:', error);
       toast.error('Failed to load project members');
     }
-  };
+  }, [projectId]);
 
-  const fetchAvailableUsers = async () => {
+  const fetchAvailableUsers = useCallback(async () => {
     try {
       const response = await projectsAPI.getAvailableUsers(projectId);
       setAvailableUsers(response.data);
@@ -46,7 +45,7 @@ const ProjectMemberManagement = ({ projectId }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [projectId]);
 
   const handleAddMember = async () => {
     if (!selectedUserId) {

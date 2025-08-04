@@ -16,7 +16,7 @@ import {
 import toast from 'react-hot-toast';
 
 const ProjectListPage = () => {
-  const { canCreateProjects, canAccessAllData, user } = useAuth();
+  const { canCreateProjects, canAccessAllData } = useAuth();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
